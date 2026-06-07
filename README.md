@@ -23,7 +23,7 @@ A modular Neovim configuration built Lua using **lazy.nvim** for plugin manageme
 
 ## Installation
 
-1. Back up existing config 
+### 1. Back up existing config 
 
 ```bash
 mv ~/.config/nvim ~/.config/nvim.bak
@@ -32,13 +32,13 @@ mv ~/.local/state/nvim ~/.local/state/nvim.bak
 mv ~/.cache/nvim ~/.cache/nvim.bak
 ```
 
-2. Clone the repository
+### 2. Clone the repository
 
 ```bash
 git clone https://github.com/clintonbampoe/neovim-config.git ~/.config/nvim
 ```
 
-3. Install plugins 
+### 3. Install plugins 
 ```bash
 nvim
 ```
@@ -46,15 +46,10 @@ nvim
 `lazy.nvim` will automatically download and install the required plugins.  
 Restart Neovim once the process completes.
 
-4. Plugin Management 
+### 4. Plugin Management 
 
 Run the following command inside Neovim to manage plugins 
 -   `:Lazy` - Open the UI to view, update and clean plugins
 plugins.  
 Restart Neovim once the process completes.
-
-4. Plugin Management 
-
-Run the following command inside Neovim to manage plugins 
--   `:Lazy` - Open the UI to view, update and clean plugins
 
