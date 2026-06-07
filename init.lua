@@ -18,10 +18,7 @@ opt.ignorecase = true
 opt.smartcase = true
 opt.updatetime = 250
 
-vim.cmd('syntax on')
-vim.cmd('filetype plugin indent on')
-
-require("config.lazy")
+require('config.lazy')
 
 require('neo-tree').setup({
   source_selector = {
