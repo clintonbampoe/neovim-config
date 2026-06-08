@@ -21,7 +21,7 @@ opt.smartcase = true
 opt.updatetime = 500
 
 vim.o.scrolloff = 10
-vim.o.autowriteall = true
+
 vim.api.nvim_create_autocmd('CursorHold', {
     callback = function()
         vim.diagnostic.open_float(nil, { focus = false })
