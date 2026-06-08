@@ -10,7 +10,7 @@ return {
   end,
   keys = {
     {
-      "<C-.>",
+      "<M-CR>",
       function() require("tiny-code-action").code_action() end,
       desc = "Code action"
     },
