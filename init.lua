@@ -13,11 +13,14 @@ opt.autoindent = true
 opt.termguicolors = true
 opt.background = "dark"
 opt.clipboard = "unnamedplus"
-opt.sidescrolloff = 8
+opt.sidescrolloff = 10 
+opt.scrolloff = 10
 opt.wrap = false
 opt.ignorecase = true
 opt.smartcase = true
 opt.updatetime = 500
+
+vim.o.scrolloff = 10
 
 vim.api.nvim_create_autocmd('CursorHold', {
     callback = function()
