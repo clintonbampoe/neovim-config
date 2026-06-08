@@ -17,7 +17,15 @@ opt.sidescrolloff = 8
 opt.wrap = false
 opt.ignorecase = true
 opt.smartcase = true
-opt.updatetime = 250
+opt.updatetime = 500
+
+vim.api.nvim_create_autocmd('CursorHold', {
+    callback = function()
+        vim.diagnostic.open_float(nil, { focus = false })
+    end,
+})
+
+vim.keymap.set('n', '<C-k>', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Hover docs' })
 
 -- INLAY HINTS CONFIGS
 -- Create a custom command :ToggleInlayHints
