@@ -5,7 +5,13 @@ return {
         "hrsh7th/cmp-nvim-lsp", -- Extracts completions from Roslyn
         "hrsh7th/cmp-buffer",   -- Extracts words from the current buffer
         "hrsh7th/cmp-path",     -- Completes file system paths
-        "L3MON4D3/LuaSnip",     -- Required snippet engine
+        {
+            "L3MON4D3/LuaSnip",     -- Required snippet engine
+            dependencies = { "rafamadriz/friendly-snippets" },
+            config = function() 
+                require("luasnip.loaders.from_vscode").lazy_load()
+            end,
+        },
         "saadparwaiz1/cmp_luasnip",
     },
     config = function()
