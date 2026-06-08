@@ -21,13 +21,19 @@ opt.smartcase = true
 opt.updatetime = 500
 
 vim.o.scrolloff = 10
-
+vim.o.autowriteall = true
 vim.api.nvim_create_autocmd('CursorHold', {
     callback = function()
         vim.diagnostic.open_float(nil, { focus = false })
     end,
 })
 
+vim.keymap.set('n', '<M-CR>', function()
+  require('tiny-code-action').code_action()
+end, { buffer = bufnr, desc = 'Code action / Refactor' })
+
+-- rename symbol (F2 like in Rider/VS)
+vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename symbol' })
 vim.keymap.set('n', '<C-k>', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Hover docs' })
 
 -- INLAY HINTS CONFIGS
