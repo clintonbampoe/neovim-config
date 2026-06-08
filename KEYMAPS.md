@@ -57,7 +57,7 @@ These are active in any buffer where an LSP server is attached.
 
 | Key | Action |
 |---|---|
-| `<leader>ih` | Toggle inlay hints for current buffer |
+| `<leader>K` | Toggle inlay hints for current buffer |
 | `gd` | Go to definition |
 | `gr` | Go to references |
 | `K` | Hover documentation |
