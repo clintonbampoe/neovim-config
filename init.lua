@@ -18,9 +18,10 @@ opt.scrolloff = 10
 opt.wrap = false
 opt.ignorecase = true
 opt.smartcase = true
-opt.updatetime = 500
+opt.updatetime = 250
 
 vim.o.scrolloff = 10
+vim.keymap.set("i", "<C-CR>", "<Esc>o", { desc = "New line below" })
 
 vim.api.nvim_create_autocmd('CursorHold', {
     callback = function()
