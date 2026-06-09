@@ -23,6 +23,8 @@ opt.updatetime = 250
 vim.o.scrolloff = 10
 vim.keymap.set("i", "<C-CR>", "<Esc>o", { desc = "New line below" })
 
+vim.lsp.buf.references({ include_declaration = true })
+
 vim.api.nvim_create_autocmd('CursorHold', {
     callback = function()
         vim.diagnostic.open_float(nil, { focus = false })
