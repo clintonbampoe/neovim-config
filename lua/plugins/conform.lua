@@ -6,9 +6,11 @@ return {
     opts = {
         formatters_by_ft = {
             cs = { "csharpier" },
+            c = { "clang-format"},
+            cpp = { "clang-format"},
         },
         format_on_save = {
-            timeout_ms = 1000,
+            timeout_ms = 250,
             lsp_format = "fallback",
         },
     },

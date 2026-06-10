@@ -23,8 +23,10 @@ opt.updatetime = 250
 vim.o.scrolloff = 10
 vim.keymap.set("i", "<C-CR>", "<Esc>o", { desc = "New line below" })
 
-vim.lsp.buf.references({ include_declaration = true })
-
+vim.keymap.set('n', 'gr', function()
+    vim.lsp.buf.references({ include_declaration = true })
+end, { desc = "References" }
+)
 vim.api.nvim_create_autocmd('CursorHold', {
     callback = function()
         vim.diagnostic.open_float(nil, { focus = false })
@@ -68,6 +70,18 @@ vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], { desc = "Terminal down" })
 vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], { desc = "Terminal up" })
 vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], { desc = "Terminal right" })
 
+vim.diagnostic.config({
+  underline = true,
+  update_in_insert = false,
+  virtual_text = { spacing = 4, prefix = "●" },
+  severity_sort = true,
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function (args)
+        vim.lsp.inlay_hint.enable(true, {bufnr = args.buf })
+    end,
+})
 
 require('config.lazy')
 
