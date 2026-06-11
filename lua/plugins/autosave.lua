@@ -5,10 +5,10 @@ return {
     enabled = true,
     trigger_events = {
       immediate_save = { "BufLeave", "FocusLost" },
-      defer_save = { "InsertLeave", "TextChanged" },
-      cancel_deferred_save = { "InsertEnter" },
+      defer_save = {},
+      cancel_deferred_save = {},
     },
-    debounce_delay = 1000,
+    debounce_delay = 0,
     condition = function(buf)
       if vim.bo[buf].modifiable == false then return false end
       return true
