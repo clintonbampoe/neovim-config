@@ -27,76 +27,139 @@ Then open Neovim and run `:TSUpdate`.
 
 ---
 
-## Treesitter
+## LSP not attaching
 
-**Parsers fail to compile even on 0.11+**
+**Symptom:** No completions, no diagnostics, no hover docs.
 
-A C compiler is required. Treesitter compiles parsers from C source at install time.
+Check what's running:
+```
+:lua print(vim.inspect(vim.lsp.get_clients()))
+```
+If this returns `{}`, no LSP is attached to the current buffer.
 
+**Common causes:**
+
+1. **Server not installed** — run `:MasonInstall clangd` (or the relevant server) and restart.
+
+2. **No project root anchor (C/C++)** — clangd needs a root marker. Add one:
+   ```bash
+   touch .clangd
+   ```
+
+3. **No `compile_commands.json` (C/C++)** — clangd works without it using `--fallback-flags=-std=c11` but gives degraded results. Generate one:
+   ```bash
+   cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+   ln -s build/compile_commands.json .
+   # or without CMake:
+   bear -- make
+   ```
+
+4. **Wrong filetype** — run `:set filetype?`. If it doesn't match what the server expects (e.g. `c`, `cpp`, `cs`), the server won't attach.
+
+5. **Mason installed but lspconfig not configured** — Mason installs binaries; lspconfig tells Neovim how to use them. Both must be set up. This config handles C/C++ in `clangd.lua` and C# in `roslyn.lua`.
+
+---
+
+## Deprecation warning on startup
+
+**Symptom:** `The require('lspconfig') "framework" is deprecated` on every launch.
+
+This comes from `roslyn.nvim` internals, not your config. It is harmless — roslyn.nvim uses an older lspconfig API internally. No action needed; it will be fixed in a future roslyn.nvim release.
+
+---
+
+## Autocompletion not showing
+
+**Symptom:** No popup when typing.
+
+1. Confirm LSP is attached (see above) — the `nvim_lsp` source requires an active client
+2. Make sure you're in insert mode — completions only trigger on `TextChanged` in insert mode
+3. Force load cmp if needed: `:Lazy load nvim-cmp`
+
+The completion sources in order are: LSP → snippets (LuaSnip) → buffer words → file paths. If LSP isn't attached, only buffer words and paths will suggest.
+
+---
+
+## Formatting not working on save
+
+**Symptom:** File doesn't format when saved.
+
+1. Run `:ConformInfo` in the file — it shows which formatter is configured and whether it was found
+2. **For C/C++:** make sure `clang-format` is installed (`:MasonInstall clang-format`) and a `.clang-format` file exists in the project root or a parent directory
+3. **For C#:** make sure `csharpier` is installed (`:MasonInstall csharpier`)
+4. If formatting times out, increase the limit in `conform.lua`: `timeout_ms = 1000`
+
+Note: formatting is only configured for `c`, `cpp`, and `cs` in this config. Other filetypes need to be added to `formatters_by_ft` in `conform.lua`.
+
+---
+
+## Debugger not starting
+
+**Symptom:** `<leader>dc` errors or the UI never opens.
+
+1. **codelldb not installed** — run `:MasonInstall codelldb` and restart
+2. **Verify the binary exists:**
+   ```
+   :lua print(vim.fn.filereadable(vim.fn.stdpath("data") .. "/mason/bin/codelldb"))
+   ```
+   Should print `1`. If `0`, reinstall via Mason.
+3. **Not compiled with debug symbols** — always use `-g`:
+   ```bash
+   gcc -g -o myprogram myfile.c
+   ```
+   Without `-g`, the debugger attaches but can't show line numbers or variable values.
+4. **Wrong executable path** — when prompted, provide the full path to the compiled binary, not the source `.c` file.
+
+---
+
+## Inlay hints not showing
+
+**Symptom:** No parameter name or type hints inline.
+
+1. Requires Neovim 0.10+ — check with `:version`
+2. Toggle manually with `<leader>ih`
+3. Check if enabled for the current buffer:
+   ```
+   :lua print(vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }))
+   ```
+   Should print `true`.
+4. Inlay hints come from the language server — if LSP isn't attached, hints won't appear regardless of settings.
+
+---
+
+## Treesitter issues
+
+**Parsers fail to compile**
+
+A C compiler is required. Install it:
 ```bash
 sudo apt install gcc make
 ```
 
-Wipe and recompile after installing:
-
+Wipe and recompile:
 ```bash
 rm -rf ~/.local/share/nvim/lazy/nvim-treesitter/parser/
 nvim +"TSUpdate"
 ```
 
-**A specific language parser errors or hangs**
+**A specific parser errors**
 
-Force reinstall that parser:
-
+Force reinstall:
 ```
 :TSInstall! c_sharp
 ```
 
-This config installs: `markdown`, `c_sharp`, `xml`, `javascript`, `c`, `html`, `css`, `typescript`, `lua`, `vim`. If one is broken, target it specifically with `:TSInstall! <language>`.
+Installed parsers in this config: `markdown`, `c_sharp`, `xml`, `javascript`, `c`, `cpp`, `make`, `cmake`, `html`, `css`, `typescript`, `lua`, `vim`.
 
 **Highlighting works for some files but not others**
 
-Treesitter in this config is triggered via a `FileType` autocmd — it starts the highlighter when a file is opened. If a filetype is not in the installed parsers list above, it will not be highlighted by treesitter. Add it in `lua/plugins/treesitter.lua` under the `install()` call.
+If a filetype isn't in the installed list above, treesitter won't highlight it. Add it in `lua/plugins/treesitter.lua` under the `install()` call.
 
 ---
 
-## Icons rendering as squares or `?`
+## Roslyn (C#) not working
 
-Neo-tree, lualine, and devicons all require a Nerd Font. The font must be set in your **terminal emulator's settings** — Neovim has no font setting of its own.
-
-```bash
-# Download a Nerd Font, e.g. JetBrainsMono from https://www.nerdfonts.com/
-mkdir -p ~/.local/share/fonts
-cp ~/Downloads/JetBrainsMonoNerdFont-Regular.ttf ~/.local/share/fonts/
-fc-cache -fv
-```
-
-Then set it as your terminal's font and restart the terminal.
-
----
-
-## LSP not working
-
-**No completions / no diagnostics**
-
-Mason only installs servers — it does not configure them. This config uses `roslyn.nvim` for C# and relies on Mason for everything else. If a server isn't attaching:
-
-1. Run `:Mason` and install the server for your language
-2. Open a file of that type and run `:LspInfo` — it will show whether a client attached and why it didn't if not
-
-**Mason servers silently fail to install**
-
-Most servers Mason installs require `node` / `npm`:
-
-```bash
-sudo apt install nodejs npm
-```
-
-Run `:checkhealth mason` to see exactly what's missing.
-
-**Roslyn (C#) not working**
-
-`roslyn.nvim` requires the **.NET SDK** installed at the system level. Mason does not install it.
+`roslyn.nvim` requires the .NET SDK installed at the system level. Mason does not install it.
 
 ```bash
 # Ubuntu/Debian:
@@ -104,73 +167,51 @@ sudo apt install dotnet-sdk-8.0
 # Full guide: https://learn.microsoft.com/en-us/dotnet/core/install/linux
 ```
 
-Also note: Roslyn in this config explicitly **disables** its own formatter (`documentFormattingProvider = false`) — formatting for C# is handled by `csharpier` via conform. If formatting isn't working, install csharpier through Mason (`:Mason`, search `csharpier`, press `i`).
-
-**Inlay hints not showing for C#**
-
-Inlay hints are toggled manually with `<leader>ih`. They are not on by default. Press `<leader>ih` in a `.cs` file with Roslyn attached.
+Also note: Roslyn formatting is disabled in this config (`documentFormattingProvider = false`) — C# formatting is handled by `csharpier` via conform. If C# formatting isn't working, install csharpier: `:MasonInstall csharpier`.
 
 ---
 
-## Autocompletion not appearing
+## Icons rendering as squares or `?`
 
-The completion popup triggers automatically on text change (`TextChanged` event). If it's not appearing:
+Neo-tree, lualine, and devicons all require a Nerd Font. The font must be set in your **terminal emulator settings** — Neovim has no font setting of its own.
 
-- Confirm an LSP server is attached (`:LspInfo`)
-- The completion sources are `nvim_lsp`, `luasnip`, `buffer`, and `path` — if LSP isn't attached, only buffer words and paths will complete
-- `<Tab>` confirms the selected item; it does **not** trigger completion — if the popup isn't showing, check LSP first
+```bash
+# Download a Nerd Font e.g. JetBrainsMono from https://www.nerdfonts.com/
+mkdir -p ~/.local/share/fonts
+cp ~/Downloads/JetBrainsMonoNerdFont-Regular.ttf ~/.local/share/fonts/
+fc-cache -fv
+```
 
----
-
-## Formatting not working on save
-
-This config formats on save via conform, but **only for C#** (`csharpier`). For other filetypes, no formatter is configured by default — you must add them in `lua/plugins/conform.lua` under `formatters_by_ft`.
-
-If C# formatting isn't working:
-
-1. Install `csharpier` via Mason (`:Mason` → search `csharpier` → `i`)
-2. Run `:ConformInfo` in a `.cs` file to confirm it's found and active
-3. The timeout is set to 1000ms — if the file is large and formatting is slow, increase `timeout_ms` in `conform.lua`
+Restart your terminal after changing the font setting.
 
 ---
 
-## Telescope
+## Telescope issues
 
 **`live_grep` does nothing or errors**
-
-`ripgrep` is required:
 
 ```bash
 sudo apt install ripgrep
 ```
 
-**`find_files` misses files you expect**
+**`find_files` misses files**
 
-Telescope respects `.gitignore` by default. To search hidden/ignored files:
-
+Telescope respects `.gitignore` by default. To include hidden or ignored files:
 ```
 :Telescope find_files hidden=true no_ignore=true
 ```
 
-**Fuzzy search is slow or fzf-native errors**
+**fzf-native errors or slow search**
 
-`telescope-fzf-native` builds with `make` at install time. If the build failed:
-
+The native sorter requires `make` and compiles at install time. If it failed:
 ```bash
 sudo apt install make
 ```
-
-Then rebuild:
-
-```
-:Lazy build telescope-fzf-native.nvim
-```
+Then rebuild: `:Lazy build telescope-fzf-native.nvim`
 
 ---
 
-## Lazygit
-
-**`lazygit: command not found`**
+## Lazygit not found
 
 lazygit is a system binary — Mason does not install it.
 
@@ -182,8 +223,7 @@ sudo apt install lazygit
 # https://github.com/jesseduffield/lazygit/releases
 ```
 
-Confirm it's on your PATH after installing:
-
+Confirm it's on PATH:
 ```bash
 which lazygit && lazygit --version
 ```
@@ -192,7 +232,7 @@ which lazygit && lazygit --version
 
 ## Clipboard not working
 
-This config sets `clipboard = "unnamedplus"`, which means Neovim uses the system clipboard for all yank/paste operations. On Linux this requires an external tool:
+This config sets `clipboard = "unnamedplus"` — Neovim uses the system clipboard for all yank/paste. On Linux this requires an external tool:
 
 ```bash
 # X11:
@@ -202,25 +242,36 @@ sudo apt install xclip
 sudo apt install wl-clipboard
 ```
 
-Without one of these, yanking in Neovim will not reach your system clipboard and vice versa. Run `:checkhealth` and look at the clipboard section to confirm.
+Run `:checkhealth` and look at the clipboard section to confirm it's found.
+
+---
+
+## Mason install failures
+
+**Symptom:** `:MasonInstall` fails or hangs.
+
+1. Check the log: `:MasonLog`
+2. Run `:checkhealth mason` to see what's missing
+3. Common missing dependencies:
+   ```bash
+   sudo apt install curl unzip cmake nodejs npm
+   ```
 
 ---
 
 ## Plugins not loading after clone
 
-lazy.nvim installs automatically on first launch. If something failed mid-install or a plugin is missing:
-
 ```
 :Lazy sync
 ```
 
-If a specific plugin keeps erroring, open `:Lazy`, navigate to it, and press `l` to see its log. For a full wipe and reinstall:
+If a plugin keeps erroring, open `:Lazy`, navigate to it, and press `l` for its log. For a full wipe and reinstall:
 
 ```bash
 rm -rf ~/.local/share/nvim/lazy/
 ```
 
-Then open Neovim — lazy.nvim will reinstall everything from scratch.
+Then open Neovim — lazy.nvim reinstalls everything from scratch.
 
 ---
 
@@ -230,4 +281,4 @@ Then open Neovim — lazy.nvim will reinstall everything from scratch.
 :checkhealth
 ```
 
-This checks Neovim internals, providers (Python, Node, clipboard), and any plugin that registers a health check. Read the full output — it will name exactly what's missing.
+Checks Neovim internals, providers (clipboard, Python, Node), and any plugin that registers a health check. Read the full output — it names exactly what's missing.

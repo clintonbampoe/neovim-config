@@ -1,14 +1,12 @@
 # Key Bindings
 
-Please note that these key maps are the default keybindings for the config.
-However, they can be overriden to match the workflow of the user.  
-**VimIsFun**
+Leader key: `Space`
 
-Leader key is `<Space>`. 
+> These are the default keymaps for this config. They can be changed in `init.lua` (global keymaps) or in the relevant plugin file under `lua/plugins/`.
 
 ---
 
-## Telescope
+## Finding (Telescope)
 
 | Key | Action |
 |---|---|
@@ -16,6 +14,7 @@ Leader key is `<Space>`.
 | `<leader>fg` | Live grep (search text across all files) |
 | `<leader>fb` | Browse open buffers |
 | `<leader>fh` | Search help tags |
+| `<leader>ft` | Toggle workspace diagnostics (Trouble) |
 
 Inside a Telescope window:
 
@@ -31,39 +30,29 @@ Inside a Telescope window:
 
 ---
 
-## Lazygit
-
-| Key | Action |
-|---|---|
-| `<leader>gg` | Open lazygit |
-
-Press `?` inside lazygit for its own keybindings. Press `q` to quit.
-
----
-
-## Git hunks (gitsigns)
-
-| Key | Action |
-|---|---|
-| `<leader>gp` | Preview hunk in floating window |
-| `]c` | Jump to next changed hunk |
-| `[c` | Jump to previous changed hunk |
-
----
-
 ## LSP
 
-These are active in any buffer where an LSP server is attached.
+Active in any buffer where an LSP server is attached.
 
 | Key | Action |
 |---|---|
-| `<leader>K` | Toggle inlay hints for current buffer |
 | `gd` | Go to definition |
-| `gr` | Go to references |
-| `K` | Hover documentation |
-| `<leader>ca` | Code action |
-| `<leader>rn` | Rename symbol |
-| `[d` / `]d` | Previous / next diagnostic |
+| `gr` | Find references |
+| `K` / `<C-k>` | Hover documentation |
+| `<F2>` | Rename symbol |
+| `<Alt+Enter>` | Code actions (tiny-code-action picker) |
+| `<leader>ih` | Toggle inlay hints for current buffer |
+
+---
+
+## Diagnostics
+
+| Key | Action |
+|---|---|
+| `<leader>ft` | Toggle workspace diagnostics (Trouble) |
+| `<C-t>` | Toggle buffer diagnostics (Trouble) |
+
+Diagnostics also appear automatically in a floating window when the cursor rests on a line (`CursorHold`).
 
 ---
 
@@ -81,6 +70,46 @@ Active when the completion popup is open.
 
 ---
 
+## Debugging (C / C++)
+
+Always compile with debug symbols first: `gcc -g -o myprogram myfile.c`
+
+| Key | Action |
+|---|---|
+| `<leader>db` | Toggle breakpoint on current line |
+| `<leader>dc` | Start debugger / continue |
+| `<leader>dn` | Step over (next line) |
+| `<leader>di` | Step into (enter function call) |
+| `<leader>do` | Step out (finish current function) |
+| `<leader>dq` | Stop / terminate debugger |
+| `<leader>du` | Toggle debug UI panels |
+| `<leader>dk` | Inspect variable under cursor |
+
+Debug workflow: set a breakpoint with `<leader>db`, start with `<leader>dc`, enter the executable path when prompted, then step through with `dn`/`di`/`do`.
+
+---
+
+## Git
+
+| Key | Action |
+|---|---|
+| `<leader>gg` | Open LazyGit |
+| `<leader>gp` | Preview hunk in floating window |
+| `]c` | Jump to next git change |
+| `[c` | Jump to previous git change |
+
+Press `?` inside LazyGit for its own keybindings. Press `q` to quit.
+
+---
+
+## C# specific
+
+| Key | Action |
+|---|---|
+| `<leader>fu` | Find usages via Telescope (in `.cs` files only) |
+
+---
+
 ## Terminal (toggleterm)
 
 | Key | Action |
@@ -91,6 +120,25 @@ Active when the completion popup is open.
 | `<C-j>` | Move to window below from terminal |
 | `<C-k>` | Move to window above from terminal |
 | `<C-l>` | Move to right window from terminal |
+
+---
+
+## Window navigation
+
+| Key | Action |
+|---|---|
+| `<C-h>` | Move to left split |
+| `<C-j>` | Move to split below |
+| `<C-k>` | Move to split above |
+| `<C-l>` | Move to right split |
+
+---
+
+## Editor
+
+| Key | Action | Mode |
+|---|---|---|
+| `<C-Enter>` | New line below without leaving insert mode | Insert |
 
 ---
 

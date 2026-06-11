@@ -1,23 +1,22 @@
 # neovim-config
 
-A modular Neovim configuration written in Lua, using [lazy.nvim](https://github.com/folke/lazy.nvim) for plugin management.
+A modular Neovim configuration written in Lua, using [lazy.nvim](https://github.com/folke/lazy.nvim) for plugin management. Built for C and C# development with LSP, debugging, git integration, and a clean UI.
 
 ---
 
 ## Requirements
 
-**Neovim version: 0.11 or higher is required.**
+**Neovim 0.11 or higher is required.**
 
-> ⚠️ **Do not use Neovim 0.10.** nvim-treesitter will not work correctly on 0.10 — you will get parser errors or silent failures. Upgrade to 0.11+ before proceeding.
+> ⚠️ Do not use Neovim 0.10. nvim-treesitter will not work correctly — you will get parser errors or silent failures. Upgrade to 0.11+ before proceeding.
 
 Check your version:
 ```bash
 nvim --version
 ```
 
-To upgrade on Ubuntu/Debian:
+Upgrade on Ubuntu/Debian:
 ```bash
-# The apt version is often outdated. Install from the official release instead:
 sudo apt remove neovim
 sudo snap install nvim --classic
 # or download the latest AppImage from https://github.com/neovim/neovim/releases
@@ -26,10 +25,12 @@ sudo snap install nvim --classic
 Other required tools:
 
 - `git`
-- A [Nerd Font](https://www.nerdfonts.com/) installed and set as your terminal font — required for icons to render correctly (neo-tree, lualine, devicons all use them)
-- `gcc` or `clang` — required by nvim-treesitter to compile parsers
-- `npm` or `node` — required by Mason to install some LSP servers
-- `lazygit` — required for the lazygit.nvim plugin to function (`sudo apt install lazygit` or see [lazygit install docs](https://github.com/jesseduffield/lazygit#installation))
+- `gcc` or `clang` — required by nvim-treesitter to compile parsers, and for C development
+- `make` — required by telescope-fzf-native to build its native sorter
+- `npm` / `node` — required by Mason to install some LSP servers
+- `ripgrep` — required by Telescope live_grep (`sudo apt install ripgrep`)
+- `lazygit` — required for the lazygit.nvim plugin ([install guide](https://github.com/jesseduffield/lazygit#installation))
+- A [Nerd Font](https://www.nerdfonts.com/) installed and set as your terminal font — required for icons in neo-tree, lualine, and devicons
 
 ---
 
@@ -56,64 +57,131 @@ git clone https://github.com/clintonbampoe/neovim-config.git ~/.config/nvim
 nvim
 ```
 
-lazy.nvim will bootstrap itself and install all plugins automatically. You will see a progress UI. Wait for it to finish, then restart Neovim.
+lazy.nvim bootstraps itself and installs all plugins automatically. Wait for the progress UI to finish, then restart Neovim.
 
 > On first launch you may see warnings about missing parsers or LSP servers — these resolve after the install completes and you restart.
 
-### 4. Install LSP servers
-
-Inside Neovim, open Mason to install language servers for the languages you work with:
+### 4. Install language servers via Mason
 
 ```
 :Mason
 ```
 
-Use the Mason UI to search and install servers (e.g. `lua-language-server`, `pyright`, `tsserver`). Press `i` on a server to install it.
+Tools auto-installed by this config: `clangd`, `codelldb`, `clang-format`. For C#, also install `csharpier` from the Mason UI.
 
 ---
 
-## Plugins
+## Languages
 
-| Plugin | Purpose |
-|---|---|
-| lazy.nvim | Plugin manager |
-| nvim-treesitter | Syntax highlighting and code parsing |
-| nvim-lspconfig + mason.nvim | LSP setup and server installer |
-| nvim-cmp + LuaSnip | Autocompletion and snippets |
-| telescope.nvim | Fuzzy finder (files, text, buffers) |
-| neo-tree.nvim | File explorer sidebar |
-| lualine.nvim | Status line |
-| gitsigns.nvim | Git change indicators in the gutter |
-| lazygit.nvim | Full lazygit UI inside Neovim |
-| toggleterm.nvim | Terminal toggle |
-| conform.nvim | Code formatting |
-| catppuccin | Colorscheme |
-| roslyn.nvim | C# / .NET LSP support |
+### C / C++
+- Language server: `clangd` (auto-installed via Mason)
+- Formatter: `clang-format` (auto-installed via Mason)
+- Debugger: `codelldb` (auto-installed via Mason)
+- Inlay hints: parameter names and inferred types shown inline
+
+For best results, generate a `compile_commands.json` in your project root:
+
+```bash
+# With CMake
+cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+ln -s build/compile_commands.json .
+
+# Without CMake (requires bear)
+bear -- make
+```
+
+Also add a `.clangd` file to anchor the LSP root:
+
+```bash
+touch .clangd
+```
+
+### C#
+- Language server: Roslyn (`seblyng/roslyn.nvim`) — requires the .NET SDK installed at system level
+- Formatter: `csharpier` via conform.nvim (install via `:MasonInstall csharpier`)
+- Formatting is disabled on the LSP side and handled entirely by csharpier
+
+```bash
+# Install .NET SDK (Ubuntu/Debian)
+sudo apt install dotnet-sdk-8.0
+```
 
 ---
 
-## Directory Structure
+## Structure
 
 ```
 ~/.config/nvim/
-├── init.lua                  # Entry point: sets options, keymaps, bootstraps lazy.nvim
-├── lazy-lock.json            # Locked plugin versions (do not delete)
+├── init.lua                       -- entry point: options, keymaps, autocmds
+├── lazy-lock.json                 -- locked plugin versions (do not delete)
 └── lua/
-    └── config/
-        ├── init.lua          # Loads options, keymaps, and lazy
-        ├── keymaps.lua       # Global key bindings
-        ├── lazy.lua          # Plugin definitions and lazy.nvim bootstrap
-        └── options.lua       # Neovim settings (tabs, line numbers, etc.)
+    ├── config/
+    │   └── lazy.lua               -- lazy.nvim bootstrap and setup
+    └── plugins/
+        ├── autopairs.lua          -- auto-close brackets and quotes
+        ├── autosave.lua           -- automatic file saving
+        ├── catppuccin.lua         -- colorscheme (Mocha)
+        ├── clangd.lua             -- C/C++ language server config
+        ├── clangd_extensions.lua  -- inlay hints and AST view for C/C++
+        ├── cmp.lua                -- autocompletion engine
+        ├── conform.lua            -- format on save
+        ├── dap.lua                -- debugger core + keymaps
+        ├── dap-ui.lua             -- debugger UI panels
+        ├── gitsigns.lua           -- git change indicators in gutter
+        ├── indent-blankline.lua   -- indent guides
+        ├── lazygit.lua            -- lazygit integration
+        ├── lsp.lua                -- LSP client base config
+        ├── lualine.lua            -- statusline
+        ├── mason.lua              -- LSP and tool installer
+        ├── neo-tree.lua           -- file explorer
+        ├── roslyn.lua             -- C# language server
+        ├── telescope.lua          -- fuzzy finder
+        ├── tiny-code-action.lua   -- code action picker via Telescope
+        ├── toggleterm.lua         -- floating terminal
+        ├── treesitter.lua         -- syntax parsing and highlighting
+        └── trouble.lua            -- diagnostics list panel
 ```
 
 ---
 
-## Plugin Management
+## Plugin overview
+
+| Plugin | Purpose |
+|---|---|
+| `lazy.nvim` | Plugin manager |
+| `catppuccin` | Colorscheme (Mocha flavour) |
+| `nvim-lspconfig` | LSP client configuration |
+| `mason.nvim` | LSP and tool installer |
+| `clangd_extensions.nvim` | Extra clangd features (inlay hints, AST view) |
+| `roslyn.nvim` | C# language server |
+| `nvim-cmp` + `LuaSnip` | Autocompletion and snippets |
+| `friendly-snippets` | VSCode-style snippet collection |
+| `conform.nvim` | Format on save |
+| `nvim-dap` | Debug adapter protocol client |
+| `nvim-dap-ui` | Debugger UI panels |
+| `nvim-treesitter` | Syntax parsing, better highlighting |
+| `telescope.nvim` | Fuzzy finder |
+| `neo-tree.nvim` | File explorer |
+| `lualine.nvim` | Statusline |
+| `gitsigns.nvim` | Git hunk indicators in gutter |
+| `lazygit.nvim` | LazyGit terminal UI |
+| `toggleterm.nvim` | Floating terminal |
+| `trouble.nvim` | Diagnostics list panel |
+| `indent-blankline.nvim` | Indent guides |
+| `nvim-autopairs` | Auto-close brackets and quotes |
+| `auto-save.nvim` | Automatic file saving |
+| `tiny-code-action.nvim` | Code action picker via Telescope |
+
+---
+
+## Plugin management
 
 ```
-:Lazy          # Open plugin manager UI (update, clean, view status)
-:Lazy update   # Update all plugins
-:Lazy sync     # Install missing + update + clean unused
+:Lazy          -- open plugin manager UI
+:Lazy update   -- update all plugins
+:Lazy sync     -- install missing + update + remove unused
+:Lazy clean    -- remove unused plugins only
+:Lazy log      -- view install/load logs
 ```
 
 ---
@@ -121,4 +189,4 @@ Use the Mason UI to search and install servers (e.g. `lua-language-server`, `pyr
 ## Docs
 
 - [KEYMAPS.md](./KEYMAPS.md) — all key bindings
-- [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) — common setup issues and fixes
+- [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) — common issues and fixes
