@@ -70,6 +70,10 @@ vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], { desc = "Terminal down" })
 vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], { desc = "Terminal up" })
 vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], { desc = "Terminal right" })
 
+-- BUFFERLINE KEYMAPS 
+vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>")
+vim.keymap.set("n", "S-Tab>", "<cmd>BufferLineCyclePrev<CR>")
+
 vim.diagnostic.config({
   underline = true,
   update_in_insert = false,
