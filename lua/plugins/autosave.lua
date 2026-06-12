@@ -10,9 +10,11 @@ return {
     },
     debounce_delay = 0,
     condition = function(buf)
-      if vim.bo[buf].modifiable == false then return false end
+      if vim.bo[buf].modifiable == false then
+        return false
+      end
       return true
     end,
     write_all_buffers = false,
   },
-}   
+}

@@ -1,7 +1,7 @@
 return {
   "rcarriga/nvim-dap-ui",
   dependencies = {
-    "mfussenegger/nvim-dap",  -- ensures dap loads first
+    "mfussenegger/nvim-dap", -- ensures dap loads first
     "nvim-neotest/nvim-nio",
   },
   config = function()

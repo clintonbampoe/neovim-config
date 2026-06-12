@@ -18,9 +18,9 @@ return {
       git_status = {
         symbols = {
           -- Only define the three you want
-          added     = "+",
-          modified  = "*",
-          deleted   = "-",
+          added = "+",
+          modified = "*",
+          deleted = "-",
         },
       },
     },

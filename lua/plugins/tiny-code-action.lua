@@ -11,8 +11,10 @@ return {
   keys = {
     {
       "<M-CR>",
-      function() require("tiny-code-action").code_action() end,
-      desc = "Code action"
+      function()
+        require("tiny-code-action").code_action()
+      end,
+      desc = "Code action",
     },
   },
 }

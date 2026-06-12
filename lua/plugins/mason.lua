@@ -1,11 +1,11 @@
-return  {
-    "mason-org/mason.nvim",
-    opts = {
-        ensure_installed = {
-            "clangd",
-            "codelldb",
-            "clang-formatter",
-        },
-    },
+return {
+	"mason-org/mason.nvim",
+	opts = {
+		ensure_installed = {
+			"clangd",
+			"codelldb",
+			"clang-formatter",
+			"cmake-language-server",
+		},
+	},
 }
-

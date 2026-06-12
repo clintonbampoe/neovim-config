@@ -1,8 +1,8 @@
 return {
   "nvim-telescope/telescope.nvim",
-  dependencies = { 
+  dependencies = {
     "nvim-lua/plenary.nvim",
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" } 
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
   keys = {
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
