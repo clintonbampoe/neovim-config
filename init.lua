@@ -19,9 +19,12 @@ opt.wrap = false
 opt.ignorecase = true
 opt.smartcase = true
 opt.updatetime = 250
+opt.cursorline = true
+
+vim.g.mapleader = " "
 
 vim.o.scrolloff = 10
-vim.keymap.set("i", "<C-CR>", "<Esc>o", { desc = "New line below" })
+vim.keymap.set("i", "<C-y>", "<Esc>o", { desc = "New line below" })
 
 vim.keymap.set('n', 'gr', function()
     vim.lsp.buf.references({ include_declaration = true })
@@ -73,6 +76,10 @@ vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], { desc = "Terminal right" })
 -- BUFFERLINE KEYMAPS 
 vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>")
 vim.keymap.set("n", "S-Tab>", "<cmd>BufferLineCyclePrev<CR>")
+
+vim.keymap.set('n', '<leader>bn', '<cmd>enew<CR>', { desc = 'New buffer' })
+vim.keymap.set('n', '<leader>bd', '<cmd>bdelete<CR>', { desc = 'Delete buffer' })
+vim.keymap.set('n', 'q', '<Nop>', { desc = 'Disable Macro Recording' })
 
 vim.diagnostic.config({
   underline = true,
