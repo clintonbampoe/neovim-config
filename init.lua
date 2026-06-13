@@ -97,10 +97,13 @@ vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
 require('config.lazy')
 
 require('neo-tree').setup({
-  source_selector = {
+    window = {
+        position = "right",
+    },
+    source_selector = {
     winbar = true,
     status_line = true
-    }
+    },
 })
 
 

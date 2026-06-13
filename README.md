@@ -2,7 +2,7 @@
 
 A modular Neovim configuration written in Lua, using [lazy.nvim](https://github.com/folke/lazy.nvim) for plugin management. Built for C and C# development with LSP, debugging, git integration, and a clean UI.
 
----
+![My Nvim Screenshot](docs/images/nvim-screenshot.png)
 
 ## Requirements
 
@@ -11,11 +11,13 @@ A modular Neovim configuration written in Lua, using [lazy.nvim](https://github.
 > ⚠️ Do not use Neovim 0.10. nvim-treesitter will not work correctly — you will get parser errors or silent failures. Upgrade to 0.11+ before proceeding.
 
 Check your version:
+
 ```bash
 nvim --version
 ```
 
 Upgrade on Ubuntu/Debian:
+
 ```bash
 sudo apt remove neovim
 sudo snap install nvim --classic
@@ -74,6 +76,7 @@ Tools auto-installed by this config: `clangd`, `codelldb`, `clang-format`. For C
 ## Languages
 
 ### C / C++
+
 - Language server: `clangd` (auto-installed via Mason)
 - Formatter: `clang-format` (auto-installed via Mason)
 - Debugger: `codelldb` (auto-installed via Mason)
@@ -97,6 +100,7 @@ touch .clangd
 ```
 
 ### C#
+
 - Language server: Roslyn (`seblyng/roslyn.nvim`) — requires the .NET SDK installed at system level
 - Formatter: `csharpier` via conform.nvim (install via `:MasonInstall csharpier`)
 - Formatting is disabled on the LSP side and handled entirely by csharpier
@@ -146,31 +150,31 @@ sudo apt install dotnet-sdk-8.0
 
 ## Plugin overview
 
-| Plugin | Purpose |
-|---|---|
-| `lazy.nvim` | Plugin manager |
-| `catppuccin` | Colorscheme (Mocha flavour) |
-| `nvim-lspconfig` | LSP client configuration |
-| `mason.nvim` | LSP and tool installer |
+| Plugin                   | Purpose                                       |
+| ------------------------ | --------------------------------------------- |
+| `lazy.nvim`              | Plugin manager                                |
+| `catppuccin`             | Colorscheme (Mocha flavour)                   |
+| `nvim-lspconfig`         | LSP client configuration                      |
+| `mason.nvim`             | LSP and tool installer                        |
 | `clangd_extensions.nvim` | Extra clangd features (inlay hints, AST view) |
-| `roslyn.nvim` | C# language server |
-| `nvim-cmp` + `LuaSnip` | Autocompletion and snippets |
-| `friendly-snippets` | VSCode-style snippet collection |
-| `conform.nvim` | Format on save |
-| `nvim-dap` | Debug adapter protocol client |
-| `nvim-dap-ui` | Debugger UI panels |
-| `nvim-treesitter` | Syntax parsing, better highlighting |
-| `telescope.nvim` | Fuzzy finder |
-| `neo-tree.nvim` | File explorer |
-| `lualine.nvim` | Statusline |
-| `gitsigns.nvim` | Git hunk indicators in gutter |
-| `lazygit.nvim` | LazyGit terminal UI |
-| `toggleterm.nvim` | Floating terminal |
-| `trouble.nvim` | Diagnostics list panel |
-| `indent-blankline.nvim` | Indent guides |
-| `nvim-autopairs` | Auto-close brackets and quotes |
-| `auto-save.nvim` | Automatic file saving |
-| `tiny-code-action.nvim` | Code action picker via Telescope |
+| `roslyn.nvim`            | C# language server                            |
+| `nvim-cmp` + `LuaSnip`   | Autocompletion and snippets                   |
+| `friendly-snippets`      | VSCode-style snippet collection               |
+| `conform.nvim`           | Format on save                                |
+| `nvim-dap`               | Debug adapter protocol client                 |
+| `nvim-dap-ui`            | Debugger UI panels                            |
+| `nvim-treesitter`        | Syntax parsing, better highlighting           |
+| `telescope.nvim`         | Fuzzy finder                                  |
+| `neo-tree.nvim`          | File explorer                                 |
+| `lualine.nvim`           | Statusline                                    |
+| `gitsigns.nvim`          | Git hunk indicators in gutter                 |
+| `lazygit.nvim`           | LazyGit terminal UI                           |
+| `toggleterm.nvim`        | Floating terminal                             |
+| `trouble.nvim`           | Diagnostics list panel                        |
+| `indent-blankline.nvim`  | Indent guides                                 |
+| `nvim-autopairs`         | Auto-close brackets and quotes                |
+| `auto-save.nvim`         | Automatic file saving                         |
+| `tiny-code-action.nvim`  | Code action picker via Telescope              |
 
 ---
 
