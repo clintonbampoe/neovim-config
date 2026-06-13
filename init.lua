@@ -60,7 +60,7 @@ vim.keymap.set('n', ']c', function() require('gitsigns').next_hunk() end)
 vim.keymap.set('n', '[c', function() require('gitsigns').prev_hunk() end)
 
 -- Preview changes in a floating window
-vim.keymap.set('n', '<leader>gp', function() require('gitsigns').preview_hunk() end)
+vim.keymap.set('n', '<leader>gp', function() require('gitsigns').preview_hunk() end, {desc = "Preview changes in floating window" })
 
 
 -- TOGGLE TERM CONFIGS 

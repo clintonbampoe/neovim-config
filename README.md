@@ -1,6 +1,7 @@
 # neovim-config
 
-A modular Neovim configuration written in Lua, using [lazy.nvim](https://github.com/folke/lazy.nvim) for plugin management. Built for C and C# development with LSP, debugging, git integration, and a clean UI.
+My modular Neovim configuration written **FROM SCRATCH** in Lua, using [lazy.nvim](https://github.com/folke/lazy.nvim) for plugin management.  
+Optimized for C# and C/C++ development with LSP, debugging, git integration, and a clean UI.
 
 ![My Nvim Screenshot](docs/images/nvim-screenshot.png)
 
@@ -107,7 +108,7 @@ touch .clangd
 
 ```bash
 # Install .NET SDK (Ubuntu/Debian)
-sudo apt install dotnet-sdk-8.0
+sudo apt install dotnet-sdk
 ```
 
 ---
