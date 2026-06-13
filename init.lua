@@ -51,7 +51,7 @@ vim.api.nvim_create_user_command("ToggleInlayHints", function()
     vim.lsp.inlay_hint.enable(not current_state, { bufnr = 0 })
 end, {})
 -- Map it to a convenient key, e.g., <leader>ih
-vim.keymap.set("n", "<leader>ih", "<cmd>ToggleInlayHints<cr>", { desc = "Toggle Inlay Hints" })
+vim.keymap.set("n", "<leader>th", "<cmd>ToggleInlayHints<cr>", { desc = "Toggle Inlay Hints" })
 
 
 -- GITSIGNS CONFIGS

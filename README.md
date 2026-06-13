@@ -193,5 +193,5 @@ sudo apt install dotnet-sdk
 
 ## Docs
 
-- [KEYMAPS.md](./KEYMAPS.md) — all key bindings
-- [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) — common issues and fixes
+- [KEYMAPS.md](./docs/KEYMAPS.md) — all key bindings
+- [TROUBLESHOOTING.md](./docs/TROUBLESHOOTING.md) — common issues and fixes
