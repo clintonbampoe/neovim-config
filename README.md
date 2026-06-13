@@ -2,6 +2,7 @@
 
 My modular Neovim configuration written **FROM SCRATCH** in Lua, using [lazy.nvim](https://github.com/folke/lazy.nvim) for plugin management.  
 Optimized for C# and C/C++ development with LSP, debugging, git integration, and a clean UI.
+This config also supports other languages although it would need a bit of setup to be very optimized.
 
 ![My Nvim Screenshot](docs/images/nvim-screenshot.png)
 

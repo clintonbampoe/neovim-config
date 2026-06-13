@@ -105,7 +105,7 @@ require('config.lazy')
 
 require('neo-tree').setup({
     window = {
-        position = "right",
+        position = "left",
     },
     source_selector = {
     winbar = true,
