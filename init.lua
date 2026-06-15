@@ -36,7 +36,7 @@ vim.api.nvim_create_autocmd('CursorHold', {
     end,
 })
 
-vim.keymap.set('n', '<M-CR>', function()
+vim.keymap.set('n', '<C-;>', function()
   require('tiny-code-action').code_action()
 end, { buffer = bufnr, desc = 'Code action / Refactor' })
 

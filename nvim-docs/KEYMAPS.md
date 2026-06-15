@@ -2,19 +2,19 @@
 
 Leader key: `Space`
 
-> These are the default keymaps for this config. They can be changed in `init.lua` (global keymaps) or in the relevant plugin file under `lua/plugins/`.
+> These are the default key maps for this config. They can be changed in `init.lua` (global key maps) or in the relevant plugin file under `lua/plugins/`.
 
 ---
 
 ## Finding (Telescope)
 
-| Key | Action |
-|---|---|
-| `<leader>ff` | Find files |
+| Key          | Action                                   |
+| ------------ | ---------------------------------------- |
+| `<leader>ff` | Find files                               |
 | `<leader>fg` | Live grep (search text across all files) |
-| `<leader>fb` | Browse open buffers |
-| `<leader>fh` | Search help tags |
-| `<leader>ft` | Toggle workspace diagnostics (Trouble) |
+| `<leader>fb` | Browse open buffers                      |
+| `<leader>fh` | Search help tags                         |
+| `<leader>ft` | Toggle workspace diagnostics (Trouble)   |
 
 Inside a Telescope window:
 
