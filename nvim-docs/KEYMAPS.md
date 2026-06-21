@@ -18,13 +18,13 @@ Leader key: `Space`
 
 Inside a Telescope window:
 
-| Key | Action |
-|---|---|
+| Key               | Action                         |
+| ----------------- | ------------------------------ |
 | `<C-n>` / `<C-p>` | Move down / up through results |
-| `<CR>` | Open selected file |
-| `<C-x>` | Open in horizontal split |
-| `<C-v>` | Open in vertical split |
-| `<Esc>` | Close Telescope |
+| `<CR>`            | Open selected file             |
+| `<C-x>`           | Open in horizontal split       |
+| `<C-v>`           | Open in vertical split         |
+| `<Esc>`           | Close Telescope                |
 
 > `live_grep` requires `ripgrep`: `sudo apt install ripgrep`
 
