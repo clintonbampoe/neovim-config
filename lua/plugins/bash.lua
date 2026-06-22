@@ -1,5 +1,9 @@
 return {
+  -- LSP + shellcheck integration
+  -- Formatter: shfmt, configured in conform.lua
+
   "neovim/nvim-lspconfig",
+  ft = { "sh", "bash" },
   config = function()
     vim.lsp.config("bashls", {
       filetypes = { "sh", "bash" },
@@ -9,6 +13,6 @@ return {
         },
       },
     })
-    vim.lsp.enable("bash-language-server")
+    vim.lsp.enable("bashls")
   end,
 }

@@ -1,10 +1,10 @@
 return {
   "rachartier/tiny-code-action.nvim",
+  event = "LspAttach",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "nvim-telescope/telescope.nvim", -- for the picker UI
+    "nvim-telescope/telescope.nvim",
   },
-  event = "LspAttach",
   config = function()
     require("tiny-code-action").setup()
   end,

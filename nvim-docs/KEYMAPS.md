@@ -2,7 +2,7 @@
 
 Leader key: `Space`
 
-> These are the default key maps for this config. They can be changed in `init.lua` (global key maps) or in the relevant plugin file under `lua/plugins/`.
+> Global keymaps live in `init.lua`. Plugin keymaps live in their respective plugin file under `lua/plugins/`.
 
 ---
 
@@ -34,23 +34,23 @@ Inside a Telescope window:
 
 Active in any buffer where an LSP server is attached.
 
-| Key | Action |
-|---|---|
-| `gd` | Go to definition |
-| `gr` | Find references |
-| `K` / `<C-k>` | Hover documentation |
-| `<F2>` | Rename symbol |
+| Key           | Action                                 |
+| ------------- | -------------------------------------- |
+| `gd`          | Go to definition                       |
+| `gr`          | Find references                        |
+| `K`           | Hover documentation                    |
+| `<F2>`        | Rename symbol                          |
 | `<Alt+Enter>` | Code actions (tiny-code-action picker) |
-| `<leader>ih` | Toggle inlay hints for current buffer |
+| `<leader>th`  | Toggle inlay hints for current buffer  |
 
 ---
 
 ## Diagnostics
 
-| Key | Action |
-|---|---|
-| `<leader>ft` | Toggle workspace diagnostics (Trouble) |
-| `<C-t>` | Toggle buffer diagnostics (Trouble) |
+| Key          | Action                       |
+| ------------ | ---------------------------- |
+| `<leader>ft` | Toggle workspace diagnostics |
+| `<C-t>`      | Toggle buffer diagnostics    |
 
 Diagnostics also appear automatically in a floating window when the cursor rests on a line (`CursorHold`).
 
@@ -60,93 +60,102 @@ Diagnostics also appear automatically in a floating window when the cursor rests
 
 Active when the completion popup is open.
 
-| Key | Action |
-|---|---|
-| `<C-n>` | Select next suggestion |
-| `<C-p>` | Select previous suggestion |
-| `<Tab>` | Confirm selected suggestion |
-| `<CR>` | Confirm (only if explicitly selected) |
-| `<Esc>` | Close completion menu |
+| Key     | Action                                |
+| ------- | ------------------------------------- |
+| `<C-n>` | Select next suggestion                |
+| `<C-p>` | Select previous suggestion            |
+| `<Tab>` | Confirm selected suggestion           |
+| `<CR>`  | Confirm (only if explicitly selected) |
+| `<Esc>` | Close completion menu                 |
 
 ---
 
-## Debugging (C / C++)
+## Debugging
 
 Always compile with debug symbols first: `gcc -g -o myprogram myfile.c`
 
-| Key | Action |
-|---|---|
-| `<leader>db` | Toggle breakpoint on current line |
-| `<leader>dc` | Start debugger / continue |
-| `<leader>dn` | Step over (next line) |
-| `<leader>di` | Step into (enter function call) |
-| `<leader>do` | Step out (finish current function) |
-| `<leader>dq` | Stop / terminate debugger |
-| `<leader>du` | Toggle debug UI panels |
+| Key          | Action                        |
+| ------------ | ----------------------------- |
+| `<leader>db` | Toggle breakpoint             |
+| `<leader>dc` | Start / continue              |
+| `<leader>dn` | Step over                     |
+| `<leader>di` | Step into                     |
+| `<leader>do` | Step out                      |
+| `<leader>dq` | Stop debugger                 |
+| `<leader>du` | Toggle DAP UI                 |
 | `<leader>dk` | Inspect variable under cursor |
-
-Debug workflow: set a breakpoint with `<leader>db`, start with `<leader>dc`, enter the executable path when prompted, then step through with `dn`/`di`/`do`.
 
 ---
 
 ## Git
 
-| Key | Action |
-|---|---|
-| `<leader>gg` | Open LazyGit |
+| Key          | Action                          |
+| ------------ | ------------------------------- |
+| `<leader>gg` | Open LazyGit                    |
 | `<leader>gp` | Preview hunk in floating window |
-| `]c` | Jump to next git change |
-| `[c` | Jump to previous git change |
+| `]c`         | Jump to next change             |
+| `[c`         | Jump to previous change         |
 
-Press `?` inside LazyGit for its own keybindings. Press `q` to quit.
+Press `?` inside LazyGit for its keybindings. Press `q` to quit.
 
 ---
 
 ## C# specific
 
-| Key | Action |
-|---|---|
-| `<leader>fu` | Find usages via Telescope (in `.cs` files only) |
+| Key          | Action                                       |
+| ------------ | -------------------------------------------- |
+| `<leader>fu` | Find usages via Telescope (`.cs` files only) |
 
 ---
 
 ## Terminal (toggleterm)
 
-| Key | Action |
-|---|---|
-| `<C-\>` | Toggle floating terminal |
-| `<Esc><Esc>` | Exit terminal mode, return to normal mode |
-| `<C-h>` | Move to left window from terminal |
-| `<C-j>` | Move to window below from terminal |
-| `<C-k>` | Move to window above from terminal |
-| `<C-l>` | Move to right window from terminal |
+| Key          | Action                               |
+| ------------ | ------------------------------------ |
+| `<C-\>`      | Toggle floating terminal             |
+| `<Esc><Esc>` | Exit terminal mode, return to normal |
+| `<C-h>`      | Move to left window from terminal    |
+| `<C-j>`      | Move to window below from terminal   |
+| `<C-k>`      | Move to window above from terminal   |
+| `<C-l>`      | Move to right window from terminal   |
 
 ---
 
 ## Window navigation
 
-| Key | Action |
-|---|---|
-| `<C-h>` | Move to left split |
+| Key     | Action              |
+| ------- | ------------------- |
+| `<C-h>` | Move to left split  |
 | `<C-j>` | Move to split below |
 | `<C-k>` | Move to split above |
 | `<C-l>` | Move to right split |
 
 ---
 
+## Buffers
+
+| Key          | Action          |
+| ------------ | --------------- |
+| `<Tab>`      | Next buffer     |
+| `<S-Tab>`    | Previous buffer |
+| `<leader>bn` | New buffer      |
+| `<leader>bd` | Delete buffer   |
+
+---
+
 ## Editor
 
-| Key | Action | Mode |
-|---|---|---|
-| `<C-Enter>` | New line below without leaving insert mode | Insert |
+| Key     | Action                                     | Mode   |
+| ------- | ------------------------------------------ | ------ |
+| `<C-y>` | New line below without leaving insert mode | Insert |
 
 ---
 
 ## Plugin management (Lazy)
 
-| Command | Action |
-|---|---|
-| `:Lazy` | Open plugin manager UI |
-| `:Lazy update` | Update all plugins |
-| `:Lazy sync` | Install missing + update + remove unused |
-| `:Lazy clean` | Remove unused plugins only |
+| Command        | Action                                   |
+| -------------- | ---------------------------------------- |
+| `:Lazy`        | Open plugin manager UI                   |
+| `:Lazy update` | Update all plugins                       |
+| `:Lazy sync`   | Install missing + update + remove unused |
+| `:Lazy clean`  | Remove unused plugins only               |

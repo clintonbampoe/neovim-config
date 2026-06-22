@@ -32,9 +32,11 @@ Then open Neovim and run `:TSUpdate`.
 **Symptom:** No completions, no diagnostics, no hover docs.
 
 Check what's running:
+
 ```
 :lua print(vim.inspect(vim.lsp.get_clients()))
 ```
+
 If this returns `{}`, no LSP is attached to the current buffer.
 
 **Common causes:**
@@ -42,11 +44,13 @@ If this returns `{}`, no LSP is attached to the current buffer.
 1. **Server not installed** — run `:MasonInstall clangd` (or the relevant server) and restart.
 
 2. **No project root anchor (C/C++)** — clangd needs a root marker. Add one:
+
    ```bash
    touch .clangd
    ```
 
 3. **No `compile_commands.json` (C/C++)** — clangd works without it using `--fallback-flags=-std=c11` but gives degraded results. Generate one:
+
    ```bash
    cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
    ln -s build/compile_commands.json .
@@ -132,11 +136,13 @@ Note: formatting is only configured for `c`, `cpp`, and `cs` in this config. Oth
 **Parsers fail to compile**
 
 A C compiler is required. Install it:
+
 ```bash
 sudo apt install gcc make
 ```
 
 Wipe and recompile:
+
 ```bash
 rm -rf ~/.local/share/nvim/lazy/nvim-treesitter/parser/
 nvim +"TSUpdate"
@@ -145,6 +151,7 @@ nvim +"TSUpdate"
 **A specific parser errors**
 
 Force reinstall:
+
 ```
 :TSInstall! c_sharp
 ```
@@ -197,6 +204,7 @@ sudo apt install ripgrep
 **`find_files` misses files**
 
 Telescope respects `.gitignore` by default. To include hidden or ignored files:
+
 ```
 :Telescope find_files hidden=true no_ignore=true
 ```
@@ -204,9 +212,11 @@ Telescope respects `.gitignore` by default. To include hidden or ignored files:
 **fzf-native errors or slow search**
 
 The native sorter requires `make` and compiles at install time. If it failed:
+
 ```bash
 sudo apt install make
 ```
+
 Then rebuild: `:Lazy build telescope-fzf-native.nvim`
 
 ---
@@ -224,6 +234,7 @@ sudo apt install lazygit
 ```
 
 Confirm it's on PATH:
+
 ```bash
 which lazygit && lazygit --version
 ```
