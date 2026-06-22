@@ -9,10 +9,19 @@ return {
       c = { "clang-format" },
       cpp = { "clang-format" },
       lua = { "stylua" },
+      sh = { "shfmt" },
+      bash = { "shfmt" },
       ["_"] = { "prettier" },
     },
+
+    formatters = {
+      shfmt = {
+        prepend_args = { "-i", "2", "-ci" },
+      },
+    },
+
     format_on_save = {
-      timeout_ms = 1500,
+      timeout_ms = 2000,
       lsp_format = "fallback",
     },
   },
