@@ -1,6 +1,9 @@
 # forge-nvim
 
-Personal Neovim config. Modular by design — each language gets its own file, nothing is tangled together. Part of the [forge](https://github.com/clintonbampoe/forge) ecosystem.
+Personal Neovim config. Modular by design — each language gets its own file, nothing is tangled together.  
+Part of the [forge](https://github.com/clintonbampoe/forge) ecosystem.
+
+![screenshot of set up](./home/.config/nvim/docs/images/nvim-screenshot.png) 
 
 ## Structure
 
