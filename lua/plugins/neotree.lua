@@ -8,20 +8,15 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
   opts = {
+    window = { position = "left" },
+    source_selector = { winbar = true },
     filesystem = {
-      filtered_items = {
-        visible = true,
-      },
+      filtered_items = { visible = true },
       follow_current_file = { enabled = true },
     },
     default_component_configs = {
       git_status = {
-        symbols = {
-          -- Only define the three you want
-          added = "+",
-          modified = "*",
-          deleted = "-",
-        },
+        symbols = { added = "+", modified = "*", deleted = "-" },
       },
     },
   },
