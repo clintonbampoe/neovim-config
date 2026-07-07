@@ -48,6 +48,7 @@ return {
         "css",
         "html",
         "javascript",
+        "json",
         "lua",
         "make",
         "markdown",

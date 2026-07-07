@@ -14,6 +14,7 @@ return {
     },
   },
   keys = {
+    { "<C-\\>", "<Cmd>ToggleTerm<CR>", desc = "Toggle Terminal" },
     { "<Esc><Esc>", [[<C-\><C-n>]], mode = "t", desc = "Exit terminal mode" },
     { "<C-h>", [[<Cmd>wincmd h<CR>]], mode = "t", desc = "Terminal: move left" },
     { "<C-j>", [[<Cmd>wincmd j<CR>]], mode = "t", desc = "Terminal: move down" },

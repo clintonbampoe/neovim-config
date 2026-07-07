@@ -12,7 +12,7 @@ return {
     source_selector = { winbar = true },
     filesystem = {
       filtered_items = { visible = true },
-      follow_current_file = { enabled = true },
+      follow_current_file = { enabled = false },
     },
     default_component_configs = {
       git_status = {
