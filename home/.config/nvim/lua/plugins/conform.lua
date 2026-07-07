@@ -11,13 +11,16 @@ return {
       lua = { "stylua" },
       sh = { "shfmt" },
       bash = { "shfmt" },
+      json = { "prettier" },
+      html = { "prettier" },
+      css = { "prettier" },
     },
     formatters = {
       shfmt = { prepend_args = { "-i", "2", "-ci" } },
-      csharpier = { timeout = 3000 },
+      csharpier = { timeout = 1000 },
     },
     format_on_save = {
-      timeout_ms = 2000,
+      timeout_ms = 500,
       lsp_format = "fallback",
     },
   },

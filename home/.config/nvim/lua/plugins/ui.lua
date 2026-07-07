@@ -1,12 +1,4 @@
 return {
-  -- Colorscheme
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-    opts = { flavour = "mocha" },
-  },
-
   -- Status line
   {
     "nvim-lualine/lualine.nvim",
