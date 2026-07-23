@@ -17,6 +17,9 @@ return {
         -- C#
         "netcoredbg",
 
+        --XML
+        "lemminx",
+
         -- Bash
         "bash-language-server",
         "shellcheck",
