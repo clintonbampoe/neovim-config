@@ -9,6 +9,7 @@ return {
       cpp = { "clang-format" },
       cs = { "csharpier" },
       lua = { "stylua" },
+      xml = { "prettier" },
       sh = { "shfmt" },
       bash = { "shfmt" },
       json = { "prettier" },
@@ -17,11 +18,20 @@ return {
     },
     formatters = {
       shfmt = { prepend_args = { "-i", "2", "-ci" } },
-      csharpier = { timeout = 1000 },
-    },
-    format_on_save = {
-      timeout_ms = 500,
-      lsp_format = "fallback",
+      csharpier = { timeout = 2000 },
+      prettier = {
+        command = "prettier",
+        args = {
+          "--parser",
+          "xml",
+          "--xml-whitespace-sensitivity", -- Prevents Prettier from ignoring whitespace
+          "ignore",
+        },
+      },
+      format_on_save = {
+        timeout_ms = 1000,
+        lsp_format = "fallback",
+      },
     },
   },
 }
