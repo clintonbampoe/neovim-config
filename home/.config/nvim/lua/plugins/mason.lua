@@ -20,6 +20,11 @@ return {
         --XML
         "lemminx",
 
+        -- Go
+        "gopls",
+        "gofumpt",
+        "goimports",
+
         -- Bash
         "bash-language-server",
         "shellcheck",
