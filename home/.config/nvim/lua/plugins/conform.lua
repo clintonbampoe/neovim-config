@@ -8,6 +8,7 @@ return {
       c = { "clang-format" },
       cpp = { "clang-format" },
       cs = { "csharpier" },
+      go = { 'goimports', 'gofumpt' },
       lua = { "stylua" },
       xml = { "prettier" },
       sh = { "shfmt" },
@@ -15,6 +16,10 @@ return {
       json = { "prettier" },
       html = { "prettier" },
       css = { "prettier" },
+    },
+    format_on_save = {
+      timeout_ms = 500,
+      lsp_format = "fallback",
     },
     formatters = {
       shfmt = { prepend_args = { "-i", "2", "-ci" } },
@@ -24,13 +29,9 @@ return {
         args = {
           "--parser",
           "xml",
-          "--xml-whitespace-sensitivity", -- Prevents Prettier from ignoring whitespace
+          "--xml-whitespace-sensitivity",
           "ignore",
         },
-      },
-      format_on_save = {
-        timeout_ms = 1000,
-        lsp_format = "fallback",
       },
     },
   },
