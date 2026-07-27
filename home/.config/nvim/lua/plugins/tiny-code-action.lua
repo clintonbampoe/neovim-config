@@ -1,20 +1,20 @@
 return {
-  "rachartier/tiny-code-action.nvim",
-  event = "LspAttach",
+  'rachartier/tiny-code-action.nvim',
+  event = 'LspAttach',
   dependencies = {
-    "nvim-lua/plenary.nvim",
-    "nvim-telescope/telescope.nvim",
+    'nvim-lua/plenary.nvim',
+    'nvim-telescope/telescope.nvim',
   },
   config = function()
-    require("tiny-code-action").setup()
+    require('tiny-code-action').setup()
   end,
   keys = {
     {
-      "<M-CR>",
+      '<M-CR>',
       function()
-        require("tiny-code-action").code_action()
+        require('tiny-code-action').code_action()
       end,
-      desc = "Code action",
+      desc = 'Code action',
     },
   },
 }
