@@ -10,6 +10,7 @@ return {
       cs = { 'csharpier' },
       go = { 'goimports', 'gofumpt' },
       lua = { 'stylua' },
+      yaml = { 'yamlfix' },
       xml = { 'prettier' },
       sh = { 'shfmt' },
       bash = { 'shfmt' },

@@ -17,6 +17,10 @@ return {
         -- C#
         'netcoredbg',
 
+        -- YAML
+        'yamlfmt',
+        'yamlfix',
+
         --XML
         'lemminx',
 
