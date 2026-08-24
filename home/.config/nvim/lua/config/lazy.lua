@@ -43,4 +43,10 @@ require('rose-pine').setup({
   },
 })
 
-vim.cmd('colorscheme default')
+require('catppuccin').setup({
+  styles = {
+    italic = false,
+  },
+})
+
+vim.cmd('colorscheme catppuccin')

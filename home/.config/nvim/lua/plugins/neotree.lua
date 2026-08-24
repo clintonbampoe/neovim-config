@@ -9,7 +9,7 @@ return {
   },
   opts = {
     window = { position = 'left' },
-    source_selector = { winbar = true },
+    source_selector = { winbar = false },
     filesystem = {
       filtered_items = { visible = true },
       follow_current_file = { enabled = false },

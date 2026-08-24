@@ -18,7 +18,7 @@ return {
         'netcoredbg',
 
         -- YAML
-        'yamlfmt',
+        'yaml-language-server',
         'yamlfix',
 
         --XML

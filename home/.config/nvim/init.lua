@@ -33,7 +33,7 @@ vim.keymap.set('n', 'q', '<Nop>', { desc = 'Disable macro recording' })
 -- Diagnostics
 vim.diagnostic.config({
   underline = true,
-  update_in_insert = false,
+  update_in_insert = true,
   virtual_text = { spacing = 4, prefix = '●' },
   severity_sort = true,
 })
@@ -48,8 +48,6 @@ vim.api.nvim_create_autocmd('CursorHold', {
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local bufnr = args.buf
-
-    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 
     vim.keymap.set('n', 'gr', function()
       vim.lsp.buf.references({ include_declaration = true })

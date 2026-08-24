@@ -48,7 +48,7 @@ return {
     -- Go
     vim.lsp.config('gopls', {
       cmd = { 'gopls' },
-      filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+      filetypes = { 'go', 'gomod', 'gowork' },
       root_markers = { 'go.work', 'go.mod', '.git' },
       settings = {
         gopls = {
@@ -69,7 +69,7 @@ return {
     -- XML
     vim.lsp.config('lemminx', {
       cmd = { 'lemminx' },
-      filetypes = { 'xml', 'xsd', 'xsl', 'xslt', 'svg' },
+      filetypes = { 'xml', 'xsl', 'xslt', 'svg' },
       root_markers = { '.git' },
       settings = {
         xml = {
@@ -79,5 +79,22 @@ return {
       },
     })
     vim.lsp.enable('lemminx')
+
+    -- YAML
+    vim.lsp.config('yamlls', {
+      cmd = { 'yaml-language-server', '--stdio' },
+      filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab', 'yaml.helm-values' },
+      root_markers = { '.git' },
+      settings = {
+        yaml = {
+          format = { enable = true, singleQuote = true },
+          validate = true,
+          hover = true,
+          completion = true,
+          redhat = { telemetry = { enabled = false } },
+        },
+      },
+    })
+    vim.lsp.enable('yamlls')
   end,
 }
