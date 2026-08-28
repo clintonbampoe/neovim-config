@@ -48,6 +48,8 @@ return {
         'css',
         'html',
         'javascript',
+        'typescript',
+        'go',
         'json',
         'lua',
         'make',

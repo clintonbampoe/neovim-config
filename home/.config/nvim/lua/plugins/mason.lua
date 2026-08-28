@@ -37,6 +37,9 @@ return {
 
         -- Lua
         'stylua',
+
+        -- Typescript
+        'vtsls',
       },
     },
   },

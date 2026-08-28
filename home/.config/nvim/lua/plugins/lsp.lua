@@ -1,6 +1,28 @@
 return {
   'neovim/nvim-lspconfig',
   config = function()
+    -- LSP Keybindings & Actions
+    vim.api.nvim_create_autocmd('LspAttach', {
+      desc = 'LSP actions and keymaps',
+      callback = function(event)
+        local opts = { buffer = event.buf }
+
+        -- Standard navigation & actions
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, vim.tbl_extend('force', opts, { desc = 'Go to Definition' }))
+        vim.keymap.set('n', 'gr', vim.lsp.buf.references, vim.tbl_extend('force', opts, { desc = 'Show References' }))
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, vim.tbl_extend('force', opts, { desc = 'Hover Documentation' }))
+
+        -- Modification actions
+        vim.keymap.set(
+          'n',
+          '<leader>ca',
+          vim.lsp.buf.code_action,
+          vim.tbl_extend('force', opts, { desc = 'Code Action' })
+        )
+        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, vim.tbl_extend('force', opts, { desc = 'Rename Symbol' }))
+      end,
+    })
+
     -- Bash
     vim.lsp.config('bashls', {
       filetypes = { 'sh', 'bash' },
@@ -96,5 +118,16 @@ return {
       },
     })
     vim.lsp.enable('yamlls')
+
+    -- TYPESCRIPT
+    vim.lsp.config('vtsls', {
+      cmd = { 'vtsls', '--stdio' },
+      filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
+      root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
+      on_attach = function(client)
+        client.server_capabilities.documentFormattingProvider = false
+      end,
+    })
+    vim.lsp.enable('vtsls')
   end,
 }

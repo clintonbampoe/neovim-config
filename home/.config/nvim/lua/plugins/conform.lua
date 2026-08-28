@@ -17,6 +17,10 @@ return {
       json = { 'prettier' },
       html = { 'prettier' },
       css = { 'prettier' },
+      js = { 'prettier' },
+      jsx = { 'prettier' },
+      ts = { 'prettier' },
+      tsx = { 'prettier' },
     },
     format_after_save = {
       lsp_format = 'fallback',
