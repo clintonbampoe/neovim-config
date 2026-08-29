@@ -16,7 +16,7 @@ return {
     },
     default_component_configs = {
       git_status = {
-        symbols = { added = '+', modified = '*', deleted = '-' },
+        symbols = { added = 'A', modified = 'M', deleted = 'D' },
       },
     },
   },
