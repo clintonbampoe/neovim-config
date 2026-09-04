@@ -45,7 +45,9 @@ require('rose-pine').setup({
 
 require('catppuccin').setup({
   styles = {
-    italic = false,
+    comments = {},
+    conditionals = {},
+    miscs = {},
   },
 })
 
