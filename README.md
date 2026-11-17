@@ -65,17 +65,25 @@ stylua.toml               # formatting rules for this config itself
 You need:
 
 - Neovim **0.12+** (check with `nvim --version`)
-- System tools: `git gcc make ripgrep curl unzip nodejs npm`
-- A [Nerd Font](https://www.nerdfonts.com/) selected in your terminal (for icons)
-- [lazygit](https://github.com/jesseduffield/lazygit/releases) on your PATH
-- A clipboard helper: `xclip` (X11) or `wl-clipboard` (Wayland)
-- For C# only: [.NET SDK 10](https://learn.microsoft.com/en-us/dotnet/core/install/linux)
 
+- System tools: `git gcc make ripgrep curl unzip nodejs npm`
+
+- A [Nerd Font](https://www.nerdfonts.com/) selected in your terminal (for icons)
+
+- [lazygit](https://github.com/jesseduffield/lazygit/releases) installed on your
+system and available on your PATH
+
+- A clipboard helper: `xclip` (X11) or `wl-clipboard` (Wayland)
+
+- For C# only: [.NET SDK 10](https://learn.microsoft.com/en-us/dotnet/core/install/linux)
+Can ignore this, if you're not going to be using csharp
+
+**Quick install script:**
 ```bash
-sudo apt install git gcc make ripgrep curl unzip nodejs npm xclip
+sudo apt install git gcc make ripgrep curl unzip nodejs npm xclip lazygit
 ```
 
-**Manually:**
+**Installing plugins:**
 ```bash
 git clone https://github.com/clintonbampoe/forge-nvim.git ~/.config/nvim
 nvim --headless "+Lazy! sync" +qa   # install all plugins
