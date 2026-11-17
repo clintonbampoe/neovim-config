@@ -12,7 +12,8 @@ return {
         'clang-format',
 
         -- CMake
-        'cmake-language-server',
+        'neocmakelsp',
+        'gersemi',
 
         -- C#
         'netcoredbg',

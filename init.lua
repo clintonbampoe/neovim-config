@@ -12,6 +12,9 @@ opt.tabstop = 2
 opt.shiftwidth = 2
 opt.smartindent = true
 
+-- Reload buffers from disk automatically
+vim.o.autoread = true
+
 -- Code folding
 vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldclose:,foldsep: ,foldinner: '
 

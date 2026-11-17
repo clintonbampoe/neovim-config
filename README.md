@@ -1,19 +1,31 @@
 # forge-nvim
 
-Personal Neovim config. Part of the [forge](https://github.com/clintonbampoe/forge) ecosystem.
+Personal Neovim config. 
 
 ![screenshot](docs/images/screenshot.png)
 
-Built on [lazy.nvim](https://github.com/folke/lazy.nvim): every plugin area is one file under `lua/plugins/`, and a language gets its own file when it needs something beyond an LSP server and a formatter.
+Built on [lazy.nvim](https://github.com/folke/lazy.nvim): 
+every plugin area is one file under `lua/plugins/`, and a language gets its own 
+file when it needs something beyond an LSP server and a formatter.
 
 ## What's inside
 
-- **Looks** — catppuccin colorscheme (rose-pine, tokyonight and kanagawa are installed too), lualine statusline, indent guides
-- **Editing** — treesitter highlighting, code folding, autopairs, auto-save, format on save, completion with snippets
-- **Navigation** — telescope (files, grep, buffers, help), neo-tree file explorer, trouble diagnostics list
+- **Looks** — catppuccin colorscheme (rose-pine, tokyonight and kanagawa are installed too),
+lualine statusline, indent guides
+
+- **Editing** — treesitter highlighting, code folding, autopairs, auto-save,
+format on save, completion with snippets
+
+- **Navigation** — telescope (files, grep, buffers, help), neo-tree file explorer, 
+trouble diagnostics list
+
 - **Git** — gitsigns in the gutter, lazygit in a floating window
-- **Tools** — mason installs LSP servers, formatters and debug adapters automatically on first launch
-- **Languages** — Bash, C, C++, CMake, C#, Go, Lua, Markdown, Nginx, TypeScript/JavaScript, XML, YAML
+
+- **Tools** — mason installs LSP servers, formatters and debug adapters automatically 
+on first launch
+
+- **Languages** — Bash, C, C++, CMake, C#, Go, Lua, Markdown, Nginx, TypeScript/JavaScript,
+XML, YAML
 
 ## Layout
 
@@ -54,12 +66,12 @@ stylua.toml               # formatting rules for this config itself
 
 You need:
 
-- Neovim **0.11+** (check with `nvim --version`)
+- Neovim **0.12+** (check with `nvim --version`)
 - System tools: `git gcc make ripgrep curl unzip nodejs npm`
 - A [Nerd Font](https://www.nerdfonts.com/) selected in your terminal (for icons)
 - [lazygit](https://github.com/jesseduffield/lazygit/releases) on your PATH
 - A clipboard helper: `xclip` (X11) or `wl-clipboard` (Wayland)
-- For C# only: [.NET SDK 8](https://learn.microsoft.com/en-us/dotnet/core/install/linux)
+- For C# only: [.NET SDK 10](https://learn.microsoft.com/en-us/dotnet/core/install/linux)
 
 ```bash
 sudo apt install git gcc make ripgrep curl unzip nodejs npm xclip

@@ -56,16 +56,14 @@ return {
     vim.lsp.enable('clangd')
 
     -- CMake
-    vim.lsp.config('cmake', {
-      cmd = { 'cmake-language-server' },
-      filetypes = { 'cmake' },
-      init_options = { buildDirectory = 'build' },
-      root_markers = { 'CMakeLists.txt', 'CMakePresets.json' },
-      capabilities = {
-        documentFormattingProvider = false,
+    vim.lsp.config('neocmake', {
+      single_file_support = true,
+      init_options = {
+        format = { enable = true },
+        lint = { enable = true },
       },
     })
-    vim.lsp.enable('cmake')
+    vim.lsp.enable('neocmake')
 
     -- Go
     vim.lsp.config('gopls', {
