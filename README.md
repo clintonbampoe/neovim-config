@@ -53,8 +53,6 @@ lua/
     c.lua                 # clangd extensions + CodeLLDB debug adapter
     csharp.lua            # roslyn.nvim + find-usages keymap
     go.lua                # :GoFmt, :GoImports, :GoLint, :GoVet, :GoRun
-    bash.lua, cmake.lua, nginx.lua,
-    typescript.lua, xml.lua, yaml.lua   # empty stubs — config for these lives in lsp.lua/conform.lua
 docs/
   KEYMAPS.md              # every keybinding
   TROUBLESHOOTING.md      # common problems and their fixes
@@ -86,13 +84,25 @@ nvim                                # Mason installs the tools on first launch
 
 ## Adding a language
 Four shared files hold most of it; a fifth file is optional.
-1. **LSP server** — add a `vim.lsp.config(...)` block plus `vim.lsp.enable(...)` in `lua/plugins/lsp.lua`
-2. **Tools** — add the server and formatter names to `ensure_installed` in `lua/plugins/mason.lua`
-3. **Formatter** — add `filetype = { 'formatter' }` to `formatters_by_ft` in `lua/plugins/conform.lua`
-4. **Highlighting** — add the parser name to the `install({...})` list in `lua/plugins/editor.lua`
-5. **Extras (optional)** — create `lua/plugins/<language>.lua` for anything language-specific: plugins, debug adapters, custom commands. See `c.lua`, `csharp.lua` and `go.lua` for examples.
 
-lazy.nvim picks up new files automatically — no registration needed. If you add keymaps, add a row to `docs/KEYMAPS.md` too.
+1. **LSP server** — add a `vim.lsp.config(...)` block plus `vim.lsp.enable(...)` in
+`lua/plugins/lsp.lua`
+
+2. **Tools** — add the server and formatter names to `ensure_installed` in 
+`lua/plugins/mason.lua`
+
+3. **Formatter** — add `filetype = { 'formatter' }` to `formatters_by_ft` in 
+`lua/plugins/conform.lua`
+
+4. **Highlighting** — add the parser name to the `install({...})` list in 
+`lua/plugins/editor.lua`
+
+5. **Extras (optional)** — create `lua/plugins/<language>.lua` for anything 
+language-specific: plugins, debug adapters, custom commands. 
+See `c.lua`, `csharp.lua` and `go.lua` for examples.
+
+lazy.nvim picks up new files automatically — no registration needed.
+If you add keymaps, add a row to `docs/KEYMAPS.md` too.
 
 ## Docs
 
