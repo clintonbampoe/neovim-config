@@ -54,6 +54,7 @@ return {
         'lua',
         'make',
         'markdown',
+        'python',
         'typescript',
         'vim',
         'xml',

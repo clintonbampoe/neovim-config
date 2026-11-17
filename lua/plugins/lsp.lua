@@ -108,6 +108,21 @@ return {
     })
     vim.lsp.enable('lemminx')
 
+    -- PYTHON
+    vim.lsp.config('pyright', {
+      settings = {
+        python = {
+          analysis = {
+            autoSearchPaths = true,
+            useLibraryCodeForTypes = true,
+            diagnosticMode = 'openFilesOnly',
+            typeCheckingMode = 'standard', -- change to 'standard' or 'strict' if desired
+          },
+        },
+      },
+    })
+    vim.lsp.enable('pyright')
+
     -- YAML
     vim.lsp.config('yamlls', {
       cmd = { 'yaml-language-server', '--stdio' },

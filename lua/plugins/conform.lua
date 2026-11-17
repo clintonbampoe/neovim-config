@@ -14,6 +14,7 @@ return {
       yaml = { 'yamlfix' },
       xml = { 'prettier_xml' },
       sh = { 'shfmt' },
+      python = { 'ruff', 'ruff_format' },
       bash = { 'shfmt' },
       json = { 'prettier' },
       html = { 'prettier' },

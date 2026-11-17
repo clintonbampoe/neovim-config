@@ -27,6 +27,10 @@ return {
         'yaml-language-server',
         'yamlfix',
 
+        -- Python
+        'pyright',
+        'ruff',
+
         --XML
         'lemminx',
 

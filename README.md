@@ -24,7 +24,7 @@ trouble diagnostics list
 - **Tools** — mason installs LSP servers, formatters and debug adapters automatically 
 on first launch
 
-- **Languages** — Bash, C, C++, CMake, C#, Go, Lua, Markdown, Nginx, TypeScript/JavaScript,
+- **Languages** — Python, Bash, C, C++, CMake, C#, Go, Lua, Markdown, Nginx, TypeScript/JavaScript,
 XML, YAML
 
 ## Layout
