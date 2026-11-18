@@ -14,7 +14,7 @@ return {
     defaults = {
       layout_strategy = 'horizontal',
       layout_config = { prompt_position = 'top' },
-      initial_mode = 'insert',
+      initial_mode = 'normal',
       sorting_strategy = 'ascending',
       winblend = 0,
     },

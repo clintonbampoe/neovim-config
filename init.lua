@@ -86,7 +86,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local bufnr = args.buf
 
     vim.keymap.set('n', 'gr', function()
-      vim.lsp.buf.references({ include_declaration = true })
+      vim.lsp.buf.references({ includeDeclaration = true })
     end, { buffer = bufnr, desc = 'References' })
 
     -- K is the vim convention for hover; avoids <C-k> conflict with window nav

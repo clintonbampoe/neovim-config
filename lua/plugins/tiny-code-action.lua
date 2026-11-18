@@ -10,10 +10,12 @@ return {
   end,
   keys = {
     {
-      '<M-CR>',
+      'g.',
       function()
+        require('telescope')
         require('tiny-code-action').code_action()
       end,
+      mode = { 'n', 'x' },
       desc = 'Code action',
     },
   },

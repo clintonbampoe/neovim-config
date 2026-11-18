@@ -46,6 +46,7 @@ return {
         'shfmt',
 
         -- Lua
+        'lua-language-server',
         'stylua',
 
         -- Nginx,

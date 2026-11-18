@@ -123,6 +123,26 @@ return {
     })
     vim.lsp.enable('pyright')
 
+    vim.lsp.config('lua_ls', {
+      settings = {
+        Lua = {
+          runtime = {
+            version = 'LuaJIT',
+          },
+          diagnostics = {
+            globals = { 'vim' },
+          },
+          workspace = {
+            checkThirdParty = false,
+          },
+          telemetry = {
+            enable = false,
+          },
+        },
+      },
+    })
+    vim.lsp.enable('lua_ls')
+
     -- YAML
     vim.lsp.config('yamlls', {
       cmd = { 'yaml-language-server', '--stdio' },

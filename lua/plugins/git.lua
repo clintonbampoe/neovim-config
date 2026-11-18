@@ -16,23 +16,24 @@ return {
       {
         ']c',
         function()
-          require('gitsigns').next_hunk()
+          if vim.wo.diff then
+            vim.cmd.normal({ ']c', bang = true })
+          else
+            require('gitsigns').nav_hunk('next')
+          end
         end,
         desc = 'Next hunk',
       },
       {
         '[c',
         function()
-          require('gitsigns').prev_hunk()
+          if vim.wo.diff then
+            vim.cmd.normal({ '[c', bang = true })
+          else
+            require('gitsigns').nav_hunk('prev')
+          end
         end,
         desc = 'Prev hunk',
-      },
-      {
-        '<leader>gp',
-        function()
-          require('gitsigns').preview_hunk()
-        end,
-        desc = 'Preview hunk',
       },
     },
   },

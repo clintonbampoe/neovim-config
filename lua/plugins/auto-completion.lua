@@ -19,6 +19,7 @@ return {
     local luasnip = require('luasnip')
 
     cmp.setup({
+      ---@diagnostic disable-next-line: missing-fields
       performance = {
         debounce = 60,
         throttle = 30,
